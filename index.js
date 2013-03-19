@@ -5,7 +5,7 @@ var PhantomJSBrowser = function(baseBrowserDecorator) {
   baseBrowserDecorator(this);
 
   this._start = function(url) {
-    // create the js file, that will open testacular
+    // create the js file, that will open karma
     var captureFile = this._tempDir + '/capture.js';
     var captureCode = '(new WebPage()).open("' + url + '");';
     fs.writeFileSync(captureFile, captureCode);

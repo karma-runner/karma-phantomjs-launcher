@@ -1,8 +1,8 @@
-# testacular-phantomjs-launcher
+# karma-phantomjs-launcher
 
 > Launcher for PhantomJS.
 
-For more information on Testacular see the [homepage].
+For more information on Karma see the [homepage].
 
 
-[homepage]: http://testacular.github.com
+[homepage]: http://karma-runner.github.com
