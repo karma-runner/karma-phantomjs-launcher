@@ -1,13 +1,18 @@
 var fs = require('fs');
 
 
-var PhantomJSBrowser = function(baseBrowserDecorator) {
+var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
   baseBrowserDecorator(this);
+
+  var options = args && args.options || config && config.options || {};
 
   this._start = function(url) {
     // create the js file, that will open karma
     var captureFile = this._tempDir + '/capture.js';
-    var captureCode = '(new WebPage()).open("' + url + '");';
+    var optionsCode = Object.keys(options).map(function (key) {
+      return 'page.' + key + ' = ' + JSON.stringify(options[key]) + ';';
+    });
+    var captureCode = 'var page = new WebPage();\n' + optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
     // and start phantomjs
@@ -26,7 +31,7 @@ PhantomJSBrowser.prototype = {
   ENV_CMD: 'PHANTOMJS_BIN'
 };
 
-PhantomJSBrowser.$inject = ['baseBrowserDecorator'];
+PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsLauncher', 'args'];
 
 
 // PUBLISH DI MODULE
