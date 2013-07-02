@@ -29,7 +29,7 @@ PhantomJSBrowser.prototype = {
   ENV_CMD: 'PHANTOMJS_BIN'
 };
 
-PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.runnerOptions'];
+PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsOptions'];
 
 
 // PUBLISH DI MODULE
