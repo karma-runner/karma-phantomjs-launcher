@@ -28,5 +28,10 @@
     "grunt-npm": "~0.0.2",
     "grunt-bump": "~0.0.7",
     "grunt-auto-release": "~0.0.2"
-  }
+  },
+  "contributors": [
+    "Vojta Jina <vojta.jina@gmail.com>",
+    "Jason Dobry <jason.dobry@gmail.com>",
+    "Rob Barreca <rob.barreca@inmobi.com>"
+  ]
 }
