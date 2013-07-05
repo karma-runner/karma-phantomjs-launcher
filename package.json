@@ -22,5 +22,11 @@
   "peerDependencies": {
     "karma": "~0.9"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-npm": "~0.0.2",
+    "grunt-bump": "~0.0.7",
+    "grunt-auto-release": "~0.0.2"
+  }
 }
