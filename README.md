@@ -30,7 +30,7 @@ module.exports = function(config) {
 
     // you can define custom flags
     customLaunchers: {
-      PhantomJS_custom: {
+      'PhantomJS_custom': {
         base: 'PhantomJS',
         options: {
           windowName: 'my-window',
