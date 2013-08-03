@@ -12,7 +12,8 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     var optionsCode = Object.keys(options).map(function (key) {
       return 'page.' + key + ' = ' + JSON.stringify(options[key]) + ';';
     });
-    var captureCode = 'var page = new WebPage();\n' + optionsCode.join('\n') + '\npage.open("' + url + '");\n';
+    var captureCode = 'var page = require("webpage").create();\n' +
+        optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
     // and start phantomjs
