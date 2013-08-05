@@ -30,8 +30,9 @@
     "grunt-auto-release": "~0.0.2"
   },
   "contributors": [
-    "Vojta Jina <vojta.jina@gmail.com>",
+    "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
     "Jason Dobry <jason.dobry@gmail.com>",
-    "Rob Barreca <rob.barreca@inmobi.com>"
+    "Rob Barreca <rob.barreca@inmobi.com>",
+    "nherzing <nherzing@gmail.com>"
   ]
 }
