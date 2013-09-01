@@ -1,6 +1,6 @@
 {
   "name": "karma-phantomjs-launcher",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Karma plugin. Launcher for PhantomJS.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   ],
   "author": "Vojta Jina <vojta.jina@gmail.com>",
   "dependencies": {
-    "phantomjs": "~1.9"
+    "phantomjs": "1.9.1-0"
   },
   "peerDependencies": {
     "karma": ">=0.9"
