@@ -16,9 +16,9 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     });
     
     if(options.settings) {
-        optionsCode = optionsCode.concat(Object.keys(options.settings).map(function (key) {
-          return 'page.settings.' + key + ' = ' + JSON.stringify(options.settings[key]) + ';';
-        }));
+      optionsCode = optionsCode.concat(Object.keys(options.settings).map(function (key) {
+        return 'page.settings.' + key + ' = ' + JSON.stringify(options.settings[key]) + ';';
+      }));
     }
     
     var captureCode = 'var page = require("webpage").create();\n' +
