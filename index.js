@@ -5,9 +5,10 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
   baseBrowserDecorator(this);
 
   var options = args && args.options || config && config.options || {};
+  var flags = args && args.flags || config && config.flags || [];
 
   this._start = function(url) {
-    // create the js file, that will open karma
+    // create the js file that will open karma
     var captureFile = this._tempDir + '/capture.js';
     var optionsCode = Object.keys(options).map(function (key) {
       if (key !== 'settings') { // settings cannot be overriden, it should be extended!
@@ -26,7 +27,7 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     fs.writeFileSync(captureFile, captureCode);
 
     // and start phantomjs
-    this._execCommand(this._getCommand(), [captureFile]);
+    this._execCommand(this._getCommand(), flags.concat(captureFile));
   };
 };
 
