@@ -10,8 +10,17 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     // create the js file, that will open karma
     var captureFile = this._tempDir + '/capture.js';
     var optionsCode = Object.keys(options).map(function (key) {
-      return 'page.' + key + ' = ' + JSON.stringify(options[key]) + ';';
+      if(key !== 'settings') { // settings cannot be overriden, it should be extended!
+        return 'page.' + key + ' = ' + JSON.stringify(options[key]) + ';';
+      }
     });
+    
+    if(options.settings) {
+      optionsCode = optionsCode.concat(Object.keys(options.settings).map(function (key) {
+        return 'page.settings.' + key + ' = ' + JSON.stringify(options.settings[key]) + ';';
+      }));
+    }
+    
     var captureCode = 'var page = require("webpage").create();\n' +
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
