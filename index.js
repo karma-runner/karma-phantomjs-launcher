@@ -23,7 +23,13 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     }
 
     var captureCode = 'var page = require("webpage").create();\n' +
-        optionsCode.join('\n') + '\npage.open("' + url + '");\n';
+        'page.onConsoleMessage = function(msg, lineNum, sourceId) {\n' +
+        '  if (lineNum && sourceId) {\n' +
+        '    console.log("PhantomJS: " + msg + " (" + sourceId + ":" + lineNum + ")");\n' +
+        '  } else console.log("PhantomJS: " + msg);\n' +
+        '};\n' +
+        optionsCode.join('\n') + '\n' +
+        'page.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
     // and start phantomjs
