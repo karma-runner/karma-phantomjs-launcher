@@ -2,11 +2,10 @@ var fs = require('fs');
 
 
 function serializeOption(value) {
-  var res = value;
-  if (typeof res === 'function') {
-    res = res.toString();
+  if (typeof value === 'function') {
+    return value.toString();
   }
-  return JSON.stringify(res);
+  return JSON.stringify(value);
 }
 
 
