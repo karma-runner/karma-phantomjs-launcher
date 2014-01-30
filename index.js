@@ -1,6 +1,15 @@
 var fs = require('fs');
 
 
+function serializeOption(value) {
+  var res = value;
+  if (typeof res === 'function') {
+    res = res.toString();
+  }
+  return JSON.stringify(res);
+}
+
+
 var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
   baseBrowserDecorator(this);
 
@@ -12,13 +21,13 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
     var captureFile = this._tempDir + '/capture.js';
     var optionsCode = Object.keys(options).map(function (key) {
       if (key !== 'settings') { // settings cannot be overriden, it should be extended!
-        return 'page.' + key + ' = ' + JSON.stringify(options[key]) + ';';
+        return 'page.' + key + ' = ' + serializeOption(options[key]) + ';';
       }
     });
 
     if (options.settings) {
       optionsCode = optionsCode.concat(Object.keys(options.settings).map(function (key) {
-        return 'page.settings.' + key + ' = ' + JSON.stringify(options.settings[key]) + ';';
+        return 'page.settings.' + key + ' = ' + serializeOption(options.settings[key]) + ';';
       }));
     }
 
