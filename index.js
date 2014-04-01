@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 
 
 function serializeOption(value) {
@@ -8,6 +9,19 @@ function serializeOption(value) {
   return JSON.stringify(value);
 }
 
+var win32PhantomJSPath = function () {
+  // get the path stored in phantomjs\lib\location.js, someting like
+  //   "C:\\Users\\user-name\\AppData\\Roaming\\npm\\phantomjs.CMD"
+  var cmd = require('phantomjs').path;
+
+  // get the global npm install directory by removing the filename from cmd variable
+  var npmGlobalRoot = path.dirname(cmd);
+
+  // add known path
+  var phantom = npmGlobalRoot + '\\node_modules\\phantomjs\\bin\\phantomjs';
+
+  return phantom;
+};
 
 var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
   baseBrowserDecorator(this);
@@ -34,8 +48,15 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
+    var isWin = /^win/.test(process.platform);
+    if (isWin) {
+      flags = flags.concat(win32PhantomJSPath(), captureFile);
+    } else {
+      flags = flags.concat(captureFile);
+    }
+
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags.concat(captureFile));
+    this._execCommand(this._getCommand(), flags);
   };
 };
 
@@ -45,7 +66,7 @@ PhantomJSBrowser.prototype = {
   DEFAULT_CMD: {
     linux: require('phantomjs').path,
     darwin: require('phantomjs').path,
-    win32: require('phantomjs').path
+    win32: process.execPath //path to node.exe, see flags in _start()
   },
   ENV_CMD: 'PHANTOMJS_BIN'
 };
