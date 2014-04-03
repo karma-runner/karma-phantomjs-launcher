@@ -13,14 +13,16 @@ var win32PhantomJSPath = function () {
   // get the path stored in phantomjs\lib\location.js, someting like
   //   "C:\\Users\\user-name\\AppData\\Roaming\\npm\\phantomjs.CMD"
   var cmd = require('phantomjs').path;
+  var absolutePath = path.dirname(cmd);
 
-  // get the global npm install directory by removing the filename from cmd variable
-  var npmGlobalRoot = path.dirname(cmd);
+  // for a local install, we get the ".exe" for a global install we get the ".cmd"
+  var packageRoot, isLocal = (path.extname(cmd) === ".exe");
+  if (isLocal) {
+    packageRoot = path.join(absolutePath, '/../..');
+    return path.join(packageRoot, '/bin/phantomjs');
+  }
 
-  // add known path
-  var phantom = npmGlobalRoot + '\\node_modules\\phantomjs\\bin\\phantomjs';
-
-  return phantom;
+  return path.join(absolutePath, '/node_modules/phantomjs/bin/phantomjs');
 };
 
 var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
