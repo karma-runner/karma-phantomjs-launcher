@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 
-
 function serializeOption(value) {
   if (typeof value === 'function') {
     return value.toString();
@@ -9,18 +8,18 @@ function serializeOption(value) {
   return JSON.stringify(value);
 }
 
-var win32PhantomJSPath = function () {
-  // get the path stored in phantomjs\lib\location.js, someting like
-  //   "C:\\Users\\user-name\\AppData\\Roaming\\npm\\phantomjs.CMD"
-  var cmd = require('phantomjs').path;
+var phantomJSExePath = function () {
+  // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy. 
+  // Using the cmd as the process to execute causes problems cleaning up the processes 
+  // so we walk from the cmd to the phantomjs.exe and use that instead.
 
-  // get the global npm install directory by removing the filename from cmd variable
-  var npmGlobalRoot = path.dirname(cmd);
+  var phantomSource = require('phantomjs').path;
 
-  // add known path
-  var phantom = npmGlobalRoot + '\\node_modules\\phantomjs\\bin\\phantomjs';
+  if (path.extname(phantomSource).toLowerCase() === '.cmd') {
+    return path.join(path.dirname( phantomSource ), '//node_modules//phantomjs//lib//phantom//phantomjs.exe');
+  }
 
-  return phantom;
+  return phantomSource;
 };
 
 var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
@@ -48,12 +47,7 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
-    var isWin = /^win/.test(process.platform);
-    if (isWin) {
-      flags = flags.concat(win32PhantomJSPath(), captureFile);
-    } else {
-      flags = flags.concat(captureFile);
-    }
+    flags = flags.concat(captureFile);
 
     // and start phantomjs
     this._execCommand(this._getCommand(), flags);
@@ -66,7 +60,7 @@ PhantomJSBrowser.prototype = {
   DEFAULT_CMD: {
     linux: require('phantomjs').path,
     darwin: require('phantomjs').path,
-    win32: process.execPath //path to node.exe, see flags in _start()
+    win32: phantomJSExePath()
   },
   ENV_CMD: 'PHANTOMJS_BIN'
 };
