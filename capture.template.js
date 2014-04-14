@@ -15,6 +15,10 @@
   page.settings.<%= key %> = <%= value %>
   <% }) %>
 
+  page.onConsoleMessage = function () {
+      console.log.apply(console, arguments)
+  }
+
   <% if (debug) { %>
   function debugPage() {
     console.log('Launch the debugger page at http://localhost:9000/webkit/inspector/inspector.html?page=2')

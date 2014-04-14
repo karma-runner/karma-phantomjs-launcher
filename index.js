@@ -71,6 +71,14 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
     // and start phantomjs
     this._execCommand(this._getCommand(), flags)
 
+    this._process.stderr.on('data', function (data) {
+      log.error('' + data)
+    })
+
+    this._process.stdout.on('data', function (data) {
+      log.debug('' + data)
+    })
+
     if (args.debug) {
       log.info('ACTION REQUIRED:')
       log.info('')
