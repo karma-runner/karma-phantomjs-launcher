@@ -17,7 +17,7 @@
   ],
   "author": "Vojta Jina <vojta.jina@gmail.com>",
   "dependencies": {
-    "phantomjs": "~1.9"
+    "phantomjs": "1.9.12"
   },
   "peerDependencies": {
     "karma": ">=0.9"
