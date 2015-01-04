@@ -47,10 +47,8 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
-    flags = flags.concat(captureFile);
-
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags);
+    this._execCommand(this._getCommand(), flags.concat(captureFile));
   };
 };
 
