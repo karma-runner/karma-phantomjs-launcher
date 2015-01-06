@@ -9,8 +9,8 @@ function serializeOption(value) {
 }
 
 var phantomJSExePath = function () {
-  // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy. 
-  // Using the cmd as the process to execute causes problems cleaning up the processes 
+  // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy.
+  // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
 
   var phantomSource = require('phantomjs').path;
@@ -47,10 +47,10 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
-    flags = flags.concat(captureFile);
+    var commandParams = [captureFile].concat(flags);
 
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags);
+    this._execCommand(this._getCommand(), commandParams);
   };
 };
 
