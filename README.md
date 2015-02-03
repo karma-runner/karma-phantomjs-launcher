@@ -14,7 +14,7 @@ The easiest way is to keep `karma-phantomjs-launcher` as a devDependency in your
 }
 ```
 
-You can simple do it by:
+You can simply add `karma-phantomjs-launcher` to your `package.json` with:
 ```bash
 npm install karma-phantomjs-launcher --save-dev
 ```
