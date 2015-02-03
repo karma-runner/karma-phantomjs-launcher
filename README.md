@@ -43,7 +43,7 @@ module.exports = function(config) {
 };
 ```
 
-You can pass list of browsers as a CLI argument too:
+You can pass a list of browsers as a CLI argument too:
 ```bash
 karma start --browsers PhantomJS_custom
 ```
