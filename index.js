@@ -42,8 +42,11 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
         return 'page.settings.' + key + ' = ' + serializeOption(options.settings[key]) + ';';
       }));
     }
+    if (options.screenCapture) {
+      var screenCapture = 'page.onConsoleMessage = function(msg) {if(msg==="screenCapture") {page.render(Date.now()+"_screenCapture.png");}};\n';
+    }
 
-    var captureCode = 'var page = require("webpage").create();\n' +
+    var captureCode = 'var page = require("webpage").create();\n' + screenCapture +
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     fs.writeFileSync(captureFile, captureCode);
 
