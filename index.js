@@ -10,8 +10,8 @@ function serializeOption(value) {
 }
 
 var phantomJSExePath = function () {
-  // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy. 
-  // Using the cmd as the process to execute causes problems cleaning up the processes 
+  // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy.
+  // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
 
   var phantomSource = require('phantomjs').path;
@@ -34,32 +34,35 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args, logger) {
   this._start = function(url) {
     // create the js file that will open karma
     var captureFile = this._tempDir + '/capture.js';
-    var optionsCode = Object.keys(options).map(function (key) {
-      if (key !== 'settings') { // settings cannot be overriden, it should be extended!
-        return 'page.' + key + ' = ' + serializeOption(options[key]) + ';';
+    var pageOptions = {};
+    var pageSettingsOptions = {};
+
+    _.forOwn(options, function(optionsValue, optionsKey) {
+      if (optionsKey !== 'settings') { // settings cannot be overriden, it should be extended!
+        pageOptions[optionsKey] = serializeOption(optionsValue);
+      } else {
+        // key === settings
+        _.forOwn(optionsValue, function(settingsValue, settingsKey) {
+          pageSettingsOptions[settingsKey] = serializeOption(settingsValue);
+        });
       }
     });
 
-    if (options.settings) {
-      optionsCode = optionsCode.concat(Object.keys(options.settings).map(function (key) {
-        return 'page.settings.' + key + ' = ' + serializeOption(options.settings[key]) + ';';
-      }));
-    }
-
-    var captureCode;
     if (args.debug) {
       flags = flags.concat('--remote-debugger-port=9000');
       flags = flags.concat('--remote-debugger-autorun=yes');
-
-      var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'));
-
-      var compiled = _.template(file.toString());
-      captureCode = compiled({url: url});
-
-    } else {
-      captureCode = 'var page = require("webpage").create();\n' +
-        optionsCode.join('\n') + '\npage.open("' + url + '");\n';
     }
+
+    var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'));
+
+    var compiled = _.template(file.toString());
+    var captureCode = compiled({
+      debug: args.debug,
+      exitOnResourceError: config && config.exitOnResourceError,
+      pageOptions: pageOptions,
+      pageSettingsOptions: pageSettingsOptions,
+      url: url
+    });
 
     fs.writeFileSync(captureFile, captureCode);
 
