@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var _ = require('lodash');
 
 function serializeOption(value) {
   if (typeof value === 'function') {
@@ -22,7 +23,9 @@ var phantomJSExePath = function () {
   return phantomSource;
 };
 
-var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
+var PhantomJSBrowser = function(baseBrowserDecorator, config, args, logger) {
+  var log = logger.create('phantomjs.launcher');
+
   baseBrowserDecorator(this);
 
   var options = args && args.options || config && config.options || {};
@@ -43,14 +46,36 @@ var PhantomJSBrowser = function(baseBrowserDecorator, config, args) {
       }));
     }
 
-    var captureCode = 'var page = require("webpage").create();\n' +
+    var captureCode;
+    if (args.debug) {
+      flags = flags.concat('--remote-debugger-port=9000');
+      flags = flags.concat('--remote-debugger-autorun=yes');
+
+      var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'));
+
+      var compiled = _.template(file.toString());
+      captureCode = compiled({url: url});
+
+    } else {
+      captureCode = 'var page = require("webpage").create();\n' +
         optionsCode.join('\n') + '\npage.open("' + url + '");\n';
+    }
+
     fs.writeFileSync(captureFile, captureCode);
 
     flags = flags.concat(captureFile);
 
     // and start phantomjs
     this._execCommand(this._getCommand(), flags);
+
+    if (args.debug) {
+      log.info('ACTION REQUIRED:');
+      log.info('');
+      log.info('  Launch browser at');
+      log.info('  http://localhost:9000/webkit/inspector/inspector.html?page=2');
+      log.info('');
+      log.info('Waiting 15 seconds ...');
+    }
   };
 };
 
@@ -65,7 +90,7 @@ PhantomJSBrowser.prototype = {
   ENV_CMD: 'PHANTOMJS_BIN'
 };
 
-PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsLauncher', 'args'];
+PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsLauncher', 'args', 'logger'];
 
 
 // PUBLISH DI MODULE

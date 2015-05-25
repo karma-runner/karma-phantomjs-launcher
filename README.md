@@ -34,9 +34,10 @@ module.exports = function(config) {
           windowName: 'my-window',
           settings: {
             webSecurityEnabled: false
-          }
+          },
         },
-        flags: ['--remote-debugger-port=9000']
+        flags: ['--load-images=true'],
+        debug: true
       }
     }
   });
@@ -47,6 +48,12 @@ You can pass list of browsers as a CLI argument too:
 ```bash
 karma start --browsers PhantomJS_custom
 ```
+
+If you set the `debug` option to `true`, you will be instructed to launch a web browser to
+bring up the debugger. Note that you will want to put `debugger;` statements in your JavaScript
+to hit breakpoints. You should be able to put breakpoints in both your test code and your client
+code. Note that the `debug` option automatically adds the `--remote-debugger-port=9000` and
+`--remote-debugger-autorun=yes` switches to PhantomJS.
 
 ----
 
