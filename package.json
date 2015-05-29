@@ -18,7 +18,7 @@
   "author": "Vojta Jina <vojta.jina@gmail.com>",
   "dependencies": {
     "phantomjs": "~1.9",
-    "lodash": "~3.8.0"
+    "lodash": "~3.9.3"
   },
   "peerDependencies": {
     "karma": ">=0.9"
@@ -26,9 +26,10 @@
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-npm": "~0.0.2",
-    "grunt-bump": "~0.0.7",
-    "grunt-auto-release": "~0.0.2"
+    "grunt-auto-release": "~0.0.2",
+    "grunt-bump": "~0.3.1",
+    "grunt-conventional-changelog": "^1.2.2",
+    "grunt-npm": "~0.0.2"
   },
   "contributors": [
     "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",

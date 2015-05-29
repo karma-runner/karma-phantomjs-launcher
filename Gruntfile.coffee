@@ -20,10 +20,13 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-npm'
   grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-auto-release'
+  grunt.loadNpmTasks 'grunt-conventional-changelog'
 
   grunt.registerTask 'release', 'Bump the version and publish to NPM.', (type) ->
     grunt.task.run [
       'npm-contributors',
-      "bump:#{type||'patch'}",
+      "bump-only:#{type||'patch'}",
+      'changelog'
+      'bump-commit',
       'npm-publish'
     ]
