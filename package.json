@@ -17,11 +17,11 @@
   ],
   "author": "Vojta Jina <vojta.jina@gmail.com>",
   "dependencies": {
-    "phantomjs": "~1.9",
     "lodash": "~3.9.3"
   },
   "peerDependencies": {
-    "karma": ">=0.9"
+    "karma": ">=0.9",
+    "phantomjs": ">=1.9"
   },
   "license": "MIT",
   "devDependencies": {
