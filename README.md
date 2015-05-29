@@ -1,5 +1,10 @@
 # karma-phantomjs-launcher
 
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/karma-runner/karma-phantomjs-launcher)
+ [![npm version](https://img.shields.io/npm/v/karma-phantomjs-launcher.svg?style=flat-square)](https://www.npmjs.com/package/karma-phantomjs-launcher) [![npm downloads](https://img.shields.io/npm/dm/karma-phantomjs-launcher.svg?style=flat-square)](https://www.npmjs.com/package/karma-phantomjs-launcher)
+
+[![Build Status](https://img.shields.io/travis/karma-runner/karma-phantomjs-launcher/master.svg?style=flat-square)](https://travis-ci.org/karma-runner/karma-phantomjs-launcher) [![Dependency Status](https://img.shields.io/david/karma-runner/karma-phantomjs-launcher.svg?style=flat-square)](https://david-dm.org/karma-runner/karma-phantomjs-launcher) [![devDependency Status](https://img.shields.io/david/dev/karma-runner/karma-phantomjs-launcher.svg?style=flat-square)](https://david-dm.org/karma-runner/karma-phantomjs-launcher#info=devDependencies)
+
 > Launcher for [PhantomJS].
 
 ## Installation
