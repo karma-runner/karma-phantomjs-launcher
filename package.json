@@ -25,15 +25,20 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "eslint": "^0.21.2",
+    "eslint-config-standard": "^1.1.1",
+    "eslint-plugin-react": "^2.3.0",
     "grunt": "~0.4.1",
     "grunt-auto-release": "~0.0.2",
     "grunt-bump": "~0.3.1",
     "grunt-conventional-changelog": "^1.2.2",
+    "grunt-eslint": "^13.0.0",
     "grunt-karma": "^0.11.0",
     "grunt-npm": "~0.0.2",
     "jasmine-core": "^2.3.4",
     "karma": "^0.12.33",
-    "karma-jasmine": "^0.3.5"
+    "karma-jasmine": "^0.3.5",
+    "load-grunt-tasks": "^3.2.0"
   },
   "contributors": [
     "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",

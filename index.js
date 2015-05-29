@@ -1,12 +1,12 @@
-var fs = require('fs');
-var path = require('path');
-var _ = require('lodash');
+var fs = require('fs')
+var path = require('path')
+var _ = require('lodash')
 
-function serializeOption(value) {
+function serializeOption (value) {
   if (typeof value === 'function') {
-    return value.toString();
+    return value.toString()
   }
-  return JSON.stringify(value);
+  return JSON.stringify(value)
 }
 
 var phantomJSExePath = function () {
@@ -14,73 +14,73 @@ var phantomJSExePath = function () {
   // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
 
-  var phantomSource = require('phantomjs').path;
+  var phantomSource = require('phantomjs').path
 
-  if (path.extname(phantomSource).toLowerCase() === '.cmd') {
-    return path.join(path.dirname( phantomSource ), '//node_modules//phantomjs//lib//phantom//phantomjs.exe');
-  }
+  if (path.extname(phantomSource).toLowerCase() === '.cmd') {
+    return path.join(path.dirname(phantomSource), '//node_modules//phantomjs//lib//phantom//phantomjs.exe')
+  }
 
-  return phantomSource;
-};
+  return phantomSource
+}
 
-var PhantomJSBrowser = function(baseBrowserDecorator, config, args, logger) {
-  var log = logger.create('phantomjs.launcher');
+var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
+  var log = logger.create('phantomjs.launcher')
 
-  baseBrowserDecorator(this);
+  baseBrowserDecorator(this)
 
-  var options = args && args.options || config && config.options || {};
-  var flags = args && args.flags || config && config.flags || [];
+  var options = args && args.options || config && config.options || {}
+  var flags = args && args.flags || config && config.flags || []
 
-  this._start = function(url) {
+  this._start = function (url) {
     // create the js file that will open karma
-    var captureFile = this._tempDir + '/capture.js';
-    var pageOptions = {};
-    var pageSettingsOptions = {};
+    var captureFile = this._tempDir + '/capture.js'
+    var pageOptions = {}
+    var pageSettingsOptions = {}
 
-    _.forOwn(options, function(optionsValue, optionsKey) {
+    _.forOwn(options, function (optionsValue, optionsKey) {
       if (optionsKey !== 'settings') { // settings cannot be overriden, it should be extended!
-        pageOptions[optionsKey] = serializeOption(optionsValue);
+        pageOptions[optionsKey] = serializeOption(optionsValue)
       } else {
         // key === settings
-        _.forOwn(optionsValue, function(settingsValue, settingsKey) {
-          pageSettingsOptions[settingsKey] = serializeOption(settingsValue);
-        });
+        _.forOwn(optionsValue, function (settingsValue, settingsKey) {
+          pageSettingsOptions[settingsKey] = serializeOption(settingsValue)
+        })
       }
-    });
+    })
 
     if (args.debug) {
-      flags = flags.concat('--remote-debugger-port=9000');
-      flags = flags.concat('--remote-debugger-autorun=yes');
+      flags = flags.concat('--remote-debugger-port=9000')
+      flags = flags.concat('--remote-debugger-autorun=yes')
     }
 
-    var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'));
+    var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'))
 
-    var compiled = _.template(file.toString());
+    var compiled = _.template(file.toString())
     var captureCode = compiled({
       debug: args.debug,
       exitOnResourceError: config && config.exitOnResourceError,
       pageOptions: pageOptions,
       pageSettingsOptions: pageSettingsOptions,
       url: url
-    });
+    })
 
-    fs.writeFileSync(captureFile, captureCode);
+    fs.writeFileSync(captureFile, captureCode)
 
-    flags = flags.concat(captureFile);
+    flags = flags.concat(captureFile)
 
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags);
+    this._execCommand(this._getCommand(), flags)
 
     if (args.debug) {
-      log.info('ACTION REQUIRED:');
-      log.info('');
-      log.info('  Launch browser at');
-      log.info('  http://localhost:9000/webkit/inspector/inspector.html?page=2');
-      log.info('');
-      log.info('Waiting 15 seconds ...');
+      log.info('ACTION REQUIRED:')
+      log.info('')
+      log.info('  Launch browser at')
+      log.info('  http://localhost:9000/webkit/inspector/inspector.html?page=2')
+      log.info('')
+      log.info('Waiting 15 seconds ...')
     }
-  };
-};
+  }
+}
 
 PhantomJSBrowser.prototype = {
   name: 'PhantomJS',
@@ -91,12 +91,11 @@ PhantomJSBrowser.prototype = {
     win32: phantomJSExePath()
   },
   ENV_CMD: 'PHANTOMJS_BIN'
-};
+}
 
-PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsLauncher', 'args', 'logger'];
-
+PhantomJSBrowser.$inject = ['baseBrowserDecorator', 'config.phantomjsLauncher', 'args', 'logger']
 
 // PUBLISH DI MODULE
 module.exports = {
   'launcher:PhantomJS': ['type', PhantomJSBrowser]
-};
+}
