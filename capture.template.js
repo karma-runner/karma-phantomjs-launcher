@@ -1,10 +1,21 @@
-var system = require('system'),
-fs = require('fs'),
-webpage = require('webpage');
-
 (function (phantom) {
-  var page = webpage.create();
+  var page = require('webpage').create();
 
+  <% if (exitOnResourceError) { %>
+  page.onResourceError = function() {
+    phantom.exit(1);
+  };
+  <% } %>
+
+  <% _.forOwn(pageOptions, function(value, key) { %>
+  page.<%= key %> = <%= value %>;
+  <% }); %>
+
+  <% _.forOwn(pageSettingsOptions, function(value, key) { %>
+  page.settings.<%= key %> = <%= value %>;
+  <% }); %>
+
+  <% if (debug) { %>
   function debugPage() {
     console.log('Launch the debugger page at http://localhost:9000/webkit/inspector/inspector.html?page=2');
 
@@ -19,4 +30,7 @@ webpage = require('webpage');
     setTimeout(launchPage, 15000);
   }
   debugPage();
+  <% } else { %>
+  page.open('<%= url %>');
+  <% } %>
 }(phantom));
