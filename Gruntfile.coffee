@@ -17,10 +17,19 @@ module.exports = (grunt) ->
       options:
         checkTravisBuild: false
 
+    karma:
+      all:
+        configFile: 'karma.conf.js'
+
   grunt.loadNpmTasks 'grunt-npm'
   grunt.loadNpmTasks 'grunt-bump'
   grunt.loadNpmTasks 'grunt-auto-release'
   grunt.loadNpmTasks 'grunt-conventional-changelog'
+  grunt.loadNpmTasks 'grunt-karma'
+
+  grunt.registerTask 'test', ['karma']
+  grunt.registerTask 'default', ['test']
+
 
   grunt.registerTask 'release', 'Bump the version and publish to NPM.', (type) ->
     grunt.task.run [
