@@ -15,6 +15,10 @@
   page.settings.<%= key %> = <%= value %>
   <% }) %>
 
+  <% if (customizePageModule) { %>
+    require("<%= customizePageModule %>")(page);
+  <% } %>
+
   <% if (debug) { %>
   function debugPage() {
     console.log('Launch the debugger page at http://localhost:9000/webkit/inspector/inspector.html?page=2')
