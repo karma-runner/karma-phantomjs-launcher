@@ -69,7 +69,9 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
     flags = flags.concat(captureFile)
 
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags)
+    var cmd = this._getCommand()
+    cmd = path.resolve(__dirname, cmd)
+    this._execCommand(cmd, flags)
 
     if (args.debug) {
       log.info('ACTION REQUIRED:')
