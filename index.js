@@ -61,7 +61,8 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
       exitOnResourceError: config && config.exitOnResourceError,
       pageOptions: pageOptions,
       pageSettingsOptions: pageSettingsOptions,
-      url: url
+      url: url,
+      customizePageModule: args.customizePageModule
     })
 
     fs.writeFileSync(captureFile, captureCode)
