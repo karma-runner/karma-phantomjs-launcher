@@ -8,6 +8,10 @@ module.exports = function (grunt) {
     },
     bump: {
       options: {
+        commitFiles: [
+          'package.json',
+          'CHANGELOG.md'
+        ],
         commitMessage: 'chore: release v%VERSION%',
         pushTo: 'upstream'
       }
