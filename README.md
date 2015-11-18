@@ -54,6 +54,28 @@ module.exports = function(config) {
 };
 ```
 
+The `options` attribute allows you to initialize properties on
+the phantomjs `page` object, so
+
+```js
+options: {
+  windowName: 'my-window',
+  settings: {
+    webSecurityEnabled: false
+  },
+}
+```
+
+is equivalent to:
+
+```js
+var webPage = require('webpage');
+var page = webPage.create();
+
+page.windowName = 'my-window';
+page.settings.webSecurityEnabled = false;
+```
+
 You can pass list of browsers as a CLI argument too:
 ```bash
 karma start --browsers PhantomJS_custom
