@@ -9,22 +9,15 @@
 
 ## Installation
 
-The easiest way is to keep `karma-phantomjs-launcher` as a devDependency in your `package.json`.
-```json
-{
-  "devDependencies": {
-    "karma": "~0.10",
-    "karma-phantomjs-launcher": "~0.1"
-  }
-}
-```
+The easiest way is to keep `karma-phantomjs-launcher` as a devDependency in your `package.json`,
+by running
 
-You can simple do it by:
 ```bash
-npm install karma-phantomjs-launcher --save-dev
+$ npm install --save-dev karma-phantomjs-launcher
 ```
 
 ## Configuration
+
 ```js
 // karma.conf.js
 module.exports = function(config) {
@@ -50,8 +43,8 @@ module.exports = function(config) {
       // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
       exitOnResourceError: true
     }
-  });
-};
+  })
+}
 ```
 
 The `options` attribute allows you to initialize properties on
@@ -69,16 +62,16 @@ options: {
 is equivalent to:
 
 ```js
-var webPage = require('webpage');
-var page = webPage.create();
+var webPage = require('webpage')
+var page = webPage.create()
 
-page.windowName = 'my-window';
-page.settings.webSecurityEnabled = false;
+page.windowName = 'my-window'
+page.settings.webSecurityEnabled = false
 ```
 
 You can pass list of browsers as a CLI argument too:
 ```bash
-karma start --browsers PhantomJS_custom
+$ karma start --browsers PhantomJS_custom
 ```
 
 If you set the `debug` option to `true`, you will be instructed to launch a web browser to
