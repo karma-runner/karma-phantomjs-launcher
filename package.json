@@ -45,11 +45,11 @@
   "contributors": [
     "dignifiedquire <dignifiedquire@gmail.com>",
     "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
+    "Jurko Gospodnetić <jurko.gospodnetic@pke.hr>",
     "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
-    "Sylvain Hamel <sylvainhamel0@gmail.com>",
+    "Dan Siwiec <daniel.siwiec@gmail.com>",
     "Huafu Gandon <huafu.gandon@gmail.com>",
-    "Nick Malaguti <nmalaguti@palantir.com>",
-    "Rob Barreca <rob.barreca@inmobi.com>",
+    "Sylvain Hamel <sylvainhamel0@gmail.com>",
     "nherzing <nherzing@gmail.com>",
     "Chad Smith <chad@configit.com>",
     "sylvain-hamel <sylvainhamel0@gmail.com>",
@@ -57,6 +57,8 @@
     "Eryk Napierała <eryk.piast@gmail.com>",
     "Jason Dobry <jason.dobry@gmail.com>",
     "Jonathan Park <jpark@daptiv.com>",
-    "Mark Derbecker <mark.derbecker@seeq.com>"
+    "Mark Derbecker <mark.derbecker@seeq.com>",
+    "Nick Malaguti <nmalaguti@palantir.com>",
+    "Rob Barreca <rob.barreca@inmobi.com>"
   ]
 }
