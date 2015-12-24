@@ -1,3 +1,13 @@
+<a name"0.2.2"></a>
+### 0.2.2 (2015-12-24)
+
+
+#### Bug Fixes
+
+* pass PhantomJS script as the first cmd-line argument ([1c195c6b](https://github.com/karma-runner/karma-phantomjs-launcher/commit/1c195c6b))
+* do not duplicate cmd-line flags on repeated PhantomJS runs ([76228f18](https://github.com/karma-runner/karma-phantomjs-launcher/commit/76228f18))
+
+
 <a name"0.2.1"></a>
 ### 0.2.1 (2015-08-05)
 
