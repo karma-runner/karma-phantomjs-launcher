@@ -29,7 +29,7 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
   baseBrowserDecorator(this)
 
   var options = args && args.options || config && config.options || {}
-  var flags = args && args.flags || config && config.flags || []
+  var providedFlags = args && args.flags || config && config.flags || []
 
   this._start = function (url) {
     // create the js file that will open karma
@@ -48,6 +48,7 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
       }
     })
 
+    var flags = _.clone(providedFlags);
     if (args.debug) {
       flags = flags.concat('--remote-debugger-port=9000')
       flags = flags.concat('--remote-debugger-autorun=yes')
