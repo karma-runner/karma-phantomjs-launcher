@@ -62,7 +62,7 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
     fs.writeFileSync(captureFile, captureCode)
 
     // PhantomJS takes its script file as the first cmd-line argument
-    var flags = [captureFile].concat(providedFlags);
+    var flags = [captureFile].concat(providedFlags)
     if (args.debug) {
       flags.push('--remote-debugger-port=9000')
       flags.push('--remote-debugger-autorun=yes')
