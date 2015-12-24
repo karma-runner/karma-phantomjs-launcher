@@ -48,12 +48,6 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
       }
     })
 
-    var flags = _.clone(providedFlags);
-    if (args.debug) {
-      flags.push('--remote-debugger-port=9000')
-      flags.push('--remote-debugger-autorun=yes')
-    }
-
     var file = fs.readFileSync(path.join(__dirname, 'capture.template.js'))
 
     var compiled = _.template(file.toString())
@@ -67,7 +61,12 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
 
     fs.writeFileSync(captureFile, captureCode)
 
-    flags.push(captureFile)
+    // PhantomJS takes its script file as the first cmd-line argument
+    var flags = [captureFile].concat(providedFlags);
+    if (args.debug) {
+      flags.push('--remote-debugger-port=9000')
+      flags.push('--remote-debugger-autorun=yes')
+    }
 
     // and start phantomjs
     this._execCommand(this._getCommand(), flags)
