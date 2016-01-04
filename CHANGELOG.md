@@ -1,3 +1,12 @@
+<a name"0.2.3"></a>
+### 0.2.3 (2016-01-04)
+
+
+#### Bug Fixes
+
+* Correct cli argument order ([e33946dc](https://github.com/karma-runner/karma-phantomjs-launcher/commit/e33946dc), closes [#92](https://github.com/karma-runner/karma-phantomjs-launcher/issues/92), [#94](https://github.com/karma-runner/karma-phantomjs-launcher/issues/94))
+
+
 <a name"0.2.2"></a>
 ### 0.2.2 (2015-12-24)
 

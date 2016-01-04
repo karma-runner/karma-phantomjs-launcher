@@ -1,6 +1,6 @@
 {
   "name": "karma-phantomjs-launcher",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A Karma plugin. Launcher for PhantomJS.",
   "main": "index.js",
   "scripts": {
