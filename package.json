@@ -20,7 +20,6 @@
     "lodash": "^3.10.1"
   },
   "peerDependencies": {
-    "karma": ">=0.9",
     "phantomjs": ">=1.9"
   },
   "license": "MIT",
