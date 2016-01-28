@@ -1,3 +1,14 @@
+<a name"1.0.0"></a>
+## 1.0.0 (2016-01-28)
+
+
+#### Bug Fixes
+
+* replace deprecated nvm version identifier with the proper one ([9f9e0e2d](https://github.com/karma-runner/karma-phantomjs-launcher/commit/9f9e0e2d))
+* test on Node v4 instead of ancient v0.4 ([ad1aad5f](https://github.com/karma-runner/karma-phantomjs-launcher/commit/ad1aad5f))
+* use phantomjs-prebuilt instead of deprecated phantomjs ([5844941a](https://github.com/karma-runner/karma-phantomjs-launcher/commit/5844941a))
+
+
 <a name"0.2.3"></a>
 ### 0.2.3 (2016-01-04)
 
