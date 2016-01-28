@@ -14,7 +14,7 @@ var phantomJSExePath = function () {
   // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
 
-  var phantomSource = require('phantomjs').path
+  var phantomSource = require('phantomjs-prebuilt').path
 
   if (path.extname(phantomSource).toLowerCase() === '.cmd') {
     return path.join(path.dirname(phantomSource), '//node_modules//phantomjs//lib//phantom//phantomjs.exe')
@@ -98,8 +98,8 @@ PhantomJSBrowser.prototype = {
   name: 'PhantomJS',
 
   DEFAULT_CMD: {
-    linux: require('phantomjs').path,
-    darwin: require('phantomjs').path,
+    linux: require('phantomjs-prebuilt').path,
+    darwin: require('phantomjs-prebuilt').path,
     win32: phantomJSExePath()
   },
   ENV_CMD: 'PHANTOMJS_BIN'
