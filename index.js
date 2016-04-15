@@ -80,7 +80,12 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
     })
 
     this._process.stdout.on('data', function (data) {
-      log.debug('' + data)
+      var dataString = '' + data
+      if (dataString.includes('Error')) {
+        log.error('detected "Error" in browser console: ' + data)
+      } else {
+        log.debug(dataString)
+      }
     })
 
     if (args.debug) {
