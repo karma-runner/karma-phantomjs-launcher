@@ -43,14 +43,15 @@
     "phantomjs-prebuilt": "^2.1.3"
   },
   "contributors": [
-    "dignifiedquire <dignifiedquire@gmail.com>",
+    "Vojta Jina <vojta.jina@gmail.com>",
     "Friedel Ziegelmayer <dignifiedquire@gmail.com>",
     "Shinnosuke Watanabe <snnskwtnb@gmail.com>",
-    "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
     "Jurko Gospodnetić <jurko.gospodnetic@pke.hr>",
+    "Friedel Ziegelmayer <friedel.ziegelmayer@gmail.com>",
+    "Sylvain Hamel <sylvainhamel0@gmail.com>",
     "Dan Siwiec <daniel.siwiec@gmail.com>",
     "Huafu Gandon <huafu.gandon@gmail.com>",
-    "Sylvain Hamel <sylvainhamel0@gmail.com>",
+    "nherzing <nherzing@gmail.com>",
     "Chad Smith <chad@configit.com>",
     "sylvain-hamel <sylvainhamel0@gmail.com>",
     "Edward Hutchins <eahutchins@gmail.com>",
@@ -58,8 +59,8 @@
     "Jason Dobry <jason.dobry@gmail.com>",
     "Jonathan Park <jpark@daptiv.com>",
     "Mark Derbecker <mark.derbecker@seeq.com>",
+    "Mark Ethan Trostler <mark@zzo.com>",
     "Nick Malaguti <nmalaguti@palantir.com>",
-    "Rob Barreca <rob.barreca@inmobi.com>",
-    "nherzing <nherzing@gmail.com>"
+    "Rob Barreca <rob.barreca@inmobi.com>"
   ]
 }
