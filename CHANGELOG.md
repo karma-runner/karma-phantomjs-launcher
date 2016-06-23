@@ -1,3 +1,12 @@
+<a name"1.0.1"></a>
+### 1.0.1 (2016-06-23)
+
+
+#### Bug Fixes
+
+* **version-reset:** set version back to 1.0 ([9b0f5e34](https://github.com/karma-runner/karma-phantomjs-launcher/commit/9b0f5e34))
+
+
 <a name"1.0.0"></a>
 ## 1.0.0 (2016-01-28)
 
