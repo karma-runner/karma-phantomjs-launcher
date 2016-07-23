@@ -13,12 +13,11 @@ var phantomJSExePath = function () {
   // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy.
   // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
-
   var phantomSource = require('phantomjs-prebuilt').path
 
   if (path.extname(phantomSource).toLowerCase() === '.cmd') {
     var phantomPackage = require('phantomjs-prebuilt/package.json')
-    return path.join(path.dirname(phantomSource), '//node_modules//phantomjs//lib//phantom//', phantomPackage.bin.phantomjs)
+    return path.join(path.dirname(phantomSource), '//node_modules/' + phantomPackage._location + '//lib//phantom//', phantomPackage.bin.phantomjs)
   }
 
   return phantomSource
