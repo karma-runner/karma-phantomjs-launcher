@@ -1,3 +1,12 @@
+<a name"1.0.2"></a>
+### 1.0.2 (2016-08-31)
+
+
+#### Bug Fixes
+
+* incorrect phantomjs path calculation ([faa7474e](https://github.com/karma-runner/karma-phantomjs-launcher/commit/faa7474e))
+
+
 <a name"1.0.1"></a>
 ### 1.0.1 (2016-06-23)
 
