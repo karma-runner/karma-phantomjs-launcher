@@ -17,7 +17,11 @@ var phantomJSExePath = function () {
 
   if (path.extname(phantomSource).toLowerCase() === '.cmd') {
     var phantomPackage = require('phantomjs-prebuilt/package.json')
-    return path.join(path.dirname(phantomSource), '//node_modules/' + phantomPackage._location + '//lib//phantom//', phantomPackage.bin.phantomjs)
+    return path.join(
+      path.dirname(phantomSource),
+      ['', 'node_modules', phantomPackage._location, 'lib', 'phantom', ''].join('//'),
+      phantomPackage.bin.phantomjs
+    )
   }
 
   return phantomSource
