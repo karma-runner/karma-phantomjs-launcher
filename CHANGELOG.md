@@ -1,3 +1,12 @@
+<a name"1.0.4"></a>
+### 1.0.4 (2017-03-10)
+
+
+#### Bug Fixes
+
+* windows pathing ([895fb860](https://github.com/karma-runner/karma-phantomjs-launcher/commit/895fb860), closes [#167](https://github.com/karma-runner/karma-phantomjs-launcher/issues/167))
+
+
 <a name"1.0.3"></a>
 ### 1.0.3 (2017-03-10)
 
