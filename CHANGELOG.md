@@ -1,3 +1,12 @@
+<a name"1.0.3"></a>
+### 1.0.3 (2017-03-10)
+
+
+#### Bug Fixes
+
+* path issue with phantomjs and phantomjs-prebuilt ([482eba50](https://github.com/karma-runner/karma-phantomjs-launcher/commit/482eba50))
+
+
 <a name"1.0.2"></a>
 ### 1.0.2 (2016-08-31)
 
