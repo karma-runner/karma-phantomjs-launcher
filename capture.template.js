@@ -1,4 +1,4 @@
-(function (phantom) {
+;(function (phantom) {
   var page = require('webpage').create();
 
   <% if (exitOnResourceError) { %>
@@ -17,6 +17,21 @@
 
   page.onConsoleMessage = function () {
       console.log.apply(console, arguments)
+  }
+
+  page.onError = function(msg, trace) {
+
+    var msgStack = ['ERROR: ' + msg];
+
+    if (trace && trace.length) {
+      msgStack.push('TRACE:');
+      trace.forEach(function(t) {
+        msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function +'")' : ''));
+      });
+    }
+
+    console.error(msgStack.join('\n'));
+
   }
 
   <% if (debug) { %>
