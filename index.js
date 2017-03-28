@@ -77,7 +77,9 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
     flags.push(captureFile)
 
     // and start phantomjs
-    this._execCommand(this._getCommand(), flags)
+    var cmd = this._getCommand()
+    cmd = path.resolve(__dirname, cmd)
+    this._execCommand(cmd, flags)
 
     this._process.stderr.on('data', function (data) {
       log.error('' + data)
