@@ -2,6 +2,23 @@ var fs = require('fs')
 var path = require('path')
 var _ = require('lodash')
 
+var phantomSource = require('phantomjs-prebuilt').path
+
+if (phantomSource === null) {
+  var which = require('npm-which')(process.cwd())
+
+  try {
+    phantomSource = which.sync('phantomjs')
+  } catch (e) {}
+}
+
+if (phantomSource == null) {
+  var installScriptLocation = require.resolve('phantomjs-prebuilt/install')
+  var installScriptCmd = '`node ' + installScriptLocation + '`'
+
+  throw new Error("PhantomJS binary not found, make sure `phantomjs-prebuilt`'s `postinstall` is run, or manually run " + installScriptCmd)
+}
+
 function serializeOption (value) {
   if (typeof value === 'function') {
     return value.toString()
@@ -13,8 +30,6 @@ var phantomJSExePath = function () {
   // If the path we're given by phantomjs is to a .cmd, it is pointing to a global copy.
   // Using the cmd as the process to execute causes problems cleaning up the processes
   // so we walk from the cmd to the phantomjs.exe and use that instead.
-  var phantomSource = require('phantomjs-prebuilt').path
-
   if (path.extname(phantomSource).toLowerCase() === '.cmd') {
     var phantomPackage = require('phantomjs-prebuilt/package.json')
     return path.join(
@@ -102,8 +117,8 @@ PhantomJSBrowser.prototype = {
   name: 'PhantomJS',
 
   DEFAULT_CMD: {
-    linux: require('phantomjs-prebuilt').path,
-    darwin: require('phantomjs-prebuilt').path,
+    linux: phantomSource,
+    darwin: phantomSource,
     win32: phantomJSExePath()
   },
   ENV_CMD: 'PHANTOMJS_BIN'
