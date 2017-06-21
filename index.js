@@ -85,6 +85,9 @@ var PhantomJSBrowser = function (baseBrowserDecorator, config, args, logger) {
 
     this._process.stdout.on('data', function (data) {
       log.debug('' + data)
+      if (typeof options.onBrowserLogNodeContext === 'function') {
+        options.onBrowserLogNodeContext(data)
+      }
     })
 
     if (args.debug) {
